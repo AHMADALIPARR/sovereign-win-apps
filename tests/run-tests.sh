@@ -45,4 +45,27 @@ check mines-reveal "REVEALED " "$out"
 check mines-flag "FLAG 0,1 set" "$out"
 check mines-end "MINES-END revealed=" "$out"
 check mines-hash "MINES-HASH" "$out"
+# --- batch 3 ---
+printf 'click 28 90\nclick 300 30\n' > tests/sol.txt
+out=$(./bin/solitaire tests/sol.txt)
+check sol-foundation "FOUNDATION AS count=1" "$out"
+check sol-draw "DRAW KC stock=23" "$out"
+check sol-end "SOLITAIRE-END foundation=1 stock=23 waste=1 moves=1" "$out"
+check sol-hash "SOLITAIRE-HASH" "$out"
+printf 'char p\ntimer\ntimer\ntimer\nchar n\n' > tests/media.txt
+out=$(./bin/mediaplayer tests/media.txt)
+check media-play "PLAY Boot Hymn" "$out"
+check media-pos "TRACK Boot Hymn 0:03/2:05 playing" "$out"
+check media-next "NEXT Ledger Blues" "$out"
+check media-end "MEDIA-END track=1 pos=0 playing=1" "$out"
+printf 'key 40\nkey 39\nline 70\nkey 46\n' > tests/reg.txt
+out=$(./bin/regedit tests/reg.txt)
+check reg-set "SET HKCU\\Control Panel\\Volume=70" "$out"
+check reg-del "DEL HKCU\\Control Panel\\Volume" "$out"
+check reg-end "REG-END keys=3 values=5" "$out"
+printf 'char H\nchar i\nkey 2\nchar !\nkey 3\nchar ?\n' > tests/word.txt
+rm -f tests/word-out.txt
+out=$(./bin/wordpad tests/word.txt tests/word-out.txt)
+check word-end "WORDPAD-END chars=4 lines=1 bold=2 italic=1" "$out"
+check word-file "Hi!?" "$(cat tests/word-out.txt)"
 exit $fail

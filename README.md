@@ -41,11 +41,20 @@ without any Microsoft code or headers.
 - **mines** — Minesweeper: 9x9, 10 mines on a fixed-seed board (same
   board every run), click to reveal with zero flood-fill, `f` toggles
   flag mode.
+- **solitaire** — Klondike: fixed deck order so every run deals the
+  same board; click a tableau top card to move it to its foundation,
+  click the stock to draw to the waste.
+- **mediaplayer** — media player: three-track playlist, `p` play/pause,
+  `s` stop, `n`/`b` next/previous, timer ticks advance one second.
+- **regedit** — registry editor: three-key in-memory tree, arrow keys
+  navigate, typing a line sets the selected value, key 46 deletes it.
+- **wordpad** — rich text editor: notepad's file round-trip plus
+  per-character bold (key 2) and italic (key 3) flags.
 
 ## Build and test
 
 ```
-make        # builds all nine apps into bin/
+make        # builds all thirteen apps into bin/
 make test   # scripted smoke tests; transcripts are compared verbatim
 ```
 
