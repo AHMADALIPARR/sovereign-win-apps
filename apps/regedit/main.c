@@ -69,7 +69,7 @@ static long WndProc(HWND hwnd, unsigned msg, long wp, long lp) {
         else if (wp == 39 && sel_val < NVALS - 1) sel_val++;
         else if (wp == 37 && sel_val > 0) sel_val--;
         else if (wp == 13 && elen) {
-            snprintf(vdata[sel_key][sel_val], sizeof vdata[0][0], "%s", edit);
+            snprintf(vdata[sel_key][sel_val], sizeof vdata[0][0], "%.*s", (int)sizeof vdata[0][0] - 1, edit);
             deleted[sel_key][sel_val] = 0;
             SovTrace("SET %s\\%s=%s", keys[sel_key], vnames[sel_key][sel_val], edit);
             elen = 0; edit[0] = 0;
