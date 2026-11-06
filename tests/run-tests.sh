@@ -26,4 +26,23 @@ check fileman-sel "SELECTED win32sov.h" "$out"
 out=$(printf '' | SOV_TIME=10:09:35 ./bin/clock -)
 check clock-time "TIME 10:09:35" "$out"
 check clock-draw "CLOCK-HASH" "$out"
+# --- batch 2 ---
+printf 'line add 2 3\nline echo hello\nline ver\nline bogus\n' > tests/term.txt
+out=$(./bin/terminal tests/term.txt)
+check term-add "RESULT 5" "$out"
+check term-echo "TERM hello" "$out"
+check term-ver "SOVEREIGN WIN32SOV 1.0" "$out"
+check term-err "ERROR unknown command: bogus" "$out"
+printf 'key 39\nkey 39\nkey 40\nkey 39\nkey 40\nkey 32\n' > tests/ctrl.txt
+out=$(./bin/ctrlpanel tests/ctrl.txt)
+check ctrl-settings "SETTINGS volume=60 brightness=75 theme=dark wifi=on" "$out"
+out=$(printf '' | ./bin/taskman -)
+check taskman-list "PROCESSES " "$out"
+check taskman-end "TASKMAN-END processes=" "$out"
+printf 'click 10 10\nchar f\nclick 30 10\n' > tests/mines.txt
+out=$(./bin/mines tests/mines.txt)
+check mines-reveal "REVEALED " "$out"
+check mines-flag "FLAG 0,1 set" "$out"
+check mines-end "MINES-END revealed=" "$out"
+check mines-hash "MINES-HASH" "$out"
 exit $fail

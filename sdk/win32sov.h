@@ -2,7 +2,9 @@
    One main window per process, a message loop, and GDI-style drawing onto
    an in-memory canvas. The headless backend pumps scripted events so every
    application runs and is testable without a display server; a native
-   backend for the Sovereign OS targets the same API. */
+   backend for the Sovereign OS targets the same API. Script events:
+   `char X`, `line <text>` (types the text then Enter), `key N`,
+   `click X Y`, `move X Y`, `timer`, `paint`, `quit`. */
 #ifndef WIN32SOV_H
 #define WIN32SOV_H
 #include <stdint.h>

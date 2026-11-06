@@ -31,11 +31,21 @@ without any Microsoft code or headers.
   selection (key codes 38/40).
 - **clock** — analog clock face drawn from the OS time source
   (`SOV_TIME` in the headless backend).
+- **terminal** — command terminal: `help`, `ver`, `echo`, `add <a> <b>`,
+  `clear`; Enter is key 13, backspace key 8, whole lines via the `line`
+  script event.
+- **ctrlpanel** — control panel: volume, brightness, theme, Wi-Fi;
+  up/down pick a setting, left/right adjust it, space toggles it.
+- **taskman** — task manager: live process list from `/proc` (pid +
+  command name, sorted by pid), arrow-key selection, `r` refreshes.
+- **mines** — Minesweeper: 9x9, 10 mines on a fixed-seed board (same
+  board every run), click to reveal with zero flood-fill, `f` toggles
+  flag mode.
 
 ## Build and test
 
 ```
-make        # builds bin/calc bin/notepad bin/paint bin/fileman bin/clock
+make        # builds all nine apps into bin/
 make test   # scripted smoke tests; transcripts are compared verbatim
 ```
 

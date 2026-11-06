@@ -1,6 +1,6 @@
 /* win32sov.c - headless backend for the win32sov SDK.
    Script format (argv[1], "-" for stdin): one event per line:
-     char X | key N | click X Y | move X Y | timer | paint | quit
+     char X | line <text+Enter> | key N | click X Y | move X Y | timer | paint | quit
    After the script ends the window receives WM_DESTROY and the loop ends. */
 #include "win32sov.h"
 #include <stdio.h>
@@ -89,7 +89,11 @@ int SovMessageLoop(void) {
     char line[512];
     while (g_quit < 0 && fgets(line, sizeof line, f)) {
         char ev[32]; long a = 0, b = 0;
-        if (sscanf(line, "char %c", ev) == 1) dispatch(WM_CHAR, (unsigned char)ev[0], 0);
+        if (strncmp(line, "line ", 5) == 0) {
+            for (char *p = line + 5; *p && *p != '\n'; p++) dispatch(WM_CHAR, (unsigned char)*p, 0);
+            dispatch(WM_KEYDOWN, 13, 0);
+        }
+        else if (sscanf(line, "char %c", ev) == 1) dispatch(WM_CHAR, (unsigned char)ev[0], 0);
         else if (sscanf(line, "key %ld", &a) == 1) dispatch(WM_KEYDOWN, a, 0);
         else if (sscanf(line, "click %ld %ld", &a, &b) == 2) dispatch(WM_LBUTTONDOWN, 0, (b << 16) | (a & 0xFFFF));
         else if (sscanf(line, "move %ld %ld", &a, &b) == 2) dispatch(WM_MOUSEMOVE, 0, (b << 16) | (a & 0xFFFF));
