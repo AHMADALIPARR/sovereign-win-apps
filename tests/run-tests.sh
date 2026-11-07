@@ -68,4 +68,25 @@ rm -f tests/word-out.txt
 out=$(./bin/wordpad tests/word.txt tests/word-out.txt)
 check word-end "WORDPAD-END chars=4 lines=1 bold=2 italic=1" "$out"
 check word-file "Hi!?" "$(cat tests/word-out.txt)"
+# --- batch 4 ---
+printf 'key 39\nkey 39\n' > tests/charmap.txt
+out=$(./bin/charmap tests/charmap.txt)
+check charmap-sel "CHARMAP selected=34" "$out"
+check charmap-end "CHARMAP-END selected=34" "$out"
+printf 'char H\nchar i\n' > tests/stickies.txt
+out=$(./bin/stickies tests/stickies.txt)
+check stickies-note "NOTE Hi" "$out"
+check stickies-end "STICKIES-END len=2" "$out"
+printf 'key 40\nkey 40\n' > tests/eventvwr.txt
+out=$(./bin/eventvwr tests/eventvwr.txt)
+check eventvwr-sel "EVENT 2 Error: Service failed" "$out"
+check eventvwr-end "EVENTVWR-END selected=2" "$out"
+printf 'char r\ntimer\ntimer\nchar r\n' > tests/recorder.txt
+out=$(./bin/recorder tests/recorder.txt)
+check recorder-secs "RECORDER stopped secs=2" "$out"
+check recorder-end "RECORDER-END secs=2" "$out"
+printf 'key 40\nchar c\n' > tests/cleanmgr.txt
+out=$(./bin/cleanmgr tests/cleanmgr.txt)
+check cleanmgr-clean "CLEAN selected=Recycle Bin mb=45 cleaned=1 total=45" "$out"
+check cleanmgr-end "CLEANMGR-END total_cleaned=45" "$out"
 exit $fail

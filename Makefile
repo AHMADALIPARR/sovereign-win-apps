@@ -1,6 +1,6 @@
 CC      ?= gcc
 CFLAGS  ?= -std=c11 -O2 -Wall -Wextra -I sdk
-APPS    := calc notepad paint fileman clock terminal ctrlpanel taskman mines solitaire mediaplayer regedit wordpad
+APPS    := calc notepad paint fileman clock terminal ctrlpanel taskman mines solitaire mediaplayer regedit wordpad charmap stickies eventvwr recorder cleanmgr
 BINS    := $(addprefix bin/,$(APPS))
 
 all: $(BINS)

@@ -28,11 +28,18 @@
   new: solitaire moves the A of spades to its foundation on the fixed
   deck and draws the K of clubs from the stock; media player plays,
   advances 0:03 on three timer ticks, and steps to the next track;
-  registry editor sets `HKCU\Control Panel\Volume=70`, deletes it, and
+  registry editor sets `HKCU\\Control Panel\\Volume=70`, deletes it, and
   reports 5 values left; wordpad round-trips "Hi!?" with bold=2,
   italic=1 per-character flags.
 - No SDK change was needed: batch 3 runs on the batch 1 event surface
   (`char`, `line`, `key`, `click`, `timer`, `paint`).
+
+## Batch 4 (2026-11-07)
+
+- Added WINDOWS_CATALOG.md with the complete Windows 10/11 applications reference.
+- Five new C applications: charmap, stickies, eventvwr, recorder, cleanmgr.
+- All eighteen applications build against the existing win32sov SDK.
+- Scripted smoke tests extended for the new apps (selection, recording duration, cleanup totals).
 
 ## Scope and limits
 
@@ -43,10 +50,8 @@
   legible text rendering arrives with the native backend's font driver.
 - Nothing here has run on the Sovereign OS itself yet; the native
   backend (display/input drivers behind the same header) is the next
-  stage, followed by batch 4 (suggested: event viewer, character map,
-  sound recorder, disk cleanup).
+  stage.
 
 ## Repository state
 
-Local only. Not pushed; publication follows the owner's destination +
-fresh-token protocol.
+Published: https://github.com/AHMADALIPARR/sovereign-win-apps

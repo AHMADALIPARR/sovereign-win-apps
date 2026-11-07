@@ -19,6 +19,7 @@ without any Microsoft code or headers.
   backend for the Sovereign OS implements the same header against the
   OS display and input drivers.
 - `apps/` — one directory per application; each is a single `main.c`.
+- `WINDOWS_CATALOG.md` — reference catalog of Windows 10/11 applications.
 
 ## Applications
 
@@ -50,11 +51,21 @@ without any Microsoft code or headers.
   navigate, typing a line sets the selected value, key 46 deletes it.
 - **wordpad** — rich text editor: notepad's file round-trip plus
   per-character bold (key 2) and italic (key 3) flags.
+- **charmap** — character map: printable ASCII grid, arrow keys or clicks
+  select a character, traces code and glyph.
+- **stickies** — sticky notes: in-memory note with typing and backspace,
+  traces content on exit.
+- **eventvwr** — event viewer: fixed event list, arrow keys select,
+  traces selected event.
+- **recorder** — sound recorder: `r` toggles recording, timer ticks
+  accumulate seconds while recording.
+- **cleanmgr** — disk cleanup: categories with sizes, arrows select,
+  `c` cleans the selected category.
 
 ## Build and test
 
 ```
-make        # builds all thirteen apps into bin/
+make        # builds all apps into bin/
 make test   # scripted smoke tests; transcripts are compared verbatim
 ```
 
